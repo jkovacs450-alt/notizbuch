@@ -1,0 +1,259 @@
+:root {
+  --bg: #f8f4ef;
+  --paper: #fffdf9;
+  --paper-2: #fff8f0;
+  --text: #4f463f;
+  --muted: #7c6f66;
+  --line: #eadfd3;
+  --accent: #d8bfa9;
+  --accent-dark: #b99679;
+  --danger: #d88f8f;
+  --button-text: #3f342c;
+  --shadow: 0 10px 30px rgba(120, 96, 80, 0.12);
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, #fff6ef 0%, transparent 30%),
+    radial-gradient(circle at bottom right, #f8efe7 0%, transparent 35%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+}
+
+.page-decoration {
+  position: fixed;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  opacity: 0.18;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.decoration-1 {
+  top: 30px;
+  right: 40px;
+  background: #f1cfd5;
+}
+
+.decoration-2 {
+  bottom: 30px;
+  left: 40px;
+  background: #d9e7d2;
+}
+
+.notebook {
+  width: min(1000px, 92%);
+  margin: 40px auto;
+  display: grid;
+  gap: 24px;
+}
+
+.hero,
+.entry-form-card,
+.entries-section {
+  background: rgba(255, 253, 249, 0.95);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(4px);
+}
+
+.hero {
+  padding: 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,248,240,0.95));
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.entry-form-card,
+.entries-section {
+  padding: 24px;
+}
+
+.entry-form-card h2,
+.entries-section h2 {
+  margin-top: 0;
+}
+
+form {
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font: inherit;
+  background: var(--paper);
+  color: var(--text);
+  outline: none;
+  transition: 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent-dark);
+  box-shadow: 0 0 0 4px rgba(216, 191, 169, 0.2);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#save-btn {
+  background: linear-gradient(180deg, #e8d2bf, #d8bfa9);
+  color: var(--button-text);
+  box-shadow: 0 8px 20px rgba(185, 150, 121, 0.25);
+}
+
+.secondary-btn {
+  background: var(--paper-2);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.delete-btn {
+  background: #f7e4e4;
+  color: #7a3d3d;
+  border: 1px solid #e8c3c3;
+}
+
+.form-actions,
+.entry-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.status-message {
+  min-height: 22px;
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+.entries-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.entry-card {
+  background: linear-gradient(180deg, #fffdf9, #fff8f2);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.entry-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #f0d9c7, #d8bfa9);
+  border-radius: 999px;
+}
+
+.entry-inner {
+  margin-left: 16px;
+}
+
+.entry-title {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.entry-meta {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.entry-content {
+  margin: 0 0 16px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  padding: 30px 10px;
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .notebook {
+    width: 94%;
+    margin: 20px auto;
+  }
+
+  .hero,
+  .entry-form-card,
+  .entries-section {
+    padding: 18px;
+  }
+
+  .entry-card::before {
+    left: 12px;
+  }
+
+  .entry-inner {
+    margin-left: 12px;
+  }
+}

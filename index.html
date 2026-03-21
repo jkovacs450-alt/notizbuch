@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cozy Notizbuch</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-decoration decoration-1"></div>
+  <div class="page-decoration decoration-2"></div>
+
+  <main class="notebook">
+    <header class="hero">
+      <h1>📖 Mein Notizbuch</h1>
+      <p>Gedanken, Ideen und kleine Momente – mit Datum und Uhrzeit.</p>
+    </header>
+
+    <section class="entry-form-card">
+      <h2 id="form-title">Neuen Eintrag schreiben</h2>
+
+      <form id="note-form">
+        <input type="hidden" id="note-id" />
+
+        <label for="title">Titel</label>
+        <input type="text" id="title" placeholder="Zum Beispiel: Heute war ein schöner Tag" />
+
+        <label for="content">Notiz</label>
+        <textarea id="content" rows="6" placeholder="Schreibe hier deine Gedanken auf..."></textarea>
+
+        <div class="form-actions">
+          <button type="submit" id="save-btn">Eintrag speichern</button>
+          <button type="button" id="cancel-edit-btn" class="secondary-btn hidden">Bearbeiten abbrechen</button>
+        </div>
+      </form>
+
+      <p id="status-message" class="status-message"></p>
+    </section>
+
+    <section class="entries-section">
+      <div class="entries-header">
+        <h2>Alle Einträge</h2>
+        <button id="refresh-btn" class="secondary-btn">Neu laden</button>
+      </div>
+
+      <div id="entries-list" class="entries-list">
+        <p class="empty-state">Noch keine Einträge vorhanden 🌷</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
