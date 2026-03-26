@@ -3,51 +3,213 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cozy Notizbuch</title>
+  <title>Cozy Notebook</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="page-decoration decoration-1"></div>
-  <div class="page-decoration decoration-2"></div>
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
 
-  <main class="notebook">
-    <header class="hero">
-      <h1>📖 Mein Notizbuch</h1>
-      <p>Gedanken, Ideen und kleine Momente – mit Datum und Uhrzeit.</p>
-    </header>
+  <main class="app-shell">
 
-    <section class="entry-form-card">
-      <h2 id="form-title">Neuen Eintrag schreiben</h2>
-
-      <form id="note-form">
-        <input type="hidden" id="note-id" />
-
-        <label for="title">Titel</label>
-        <input type="text" id="title" placeholder="Zum Beispiel: Heute war ein schöner Tag" />
-
-        <label for="content">Notiz</label>
-        <textarea id="content" rows="6" placeholder="Schreibe hier deine Gedanken auf..."></textarea>
-
-        <div class="form-actions">
-          <button type="submit" id="save-btn">Eintrag speichern</button>
-          <button type="button" id="cancel-edit-btn" class="secondary-btn hidden">Bearbeiten abbrechen</button>
-        </div>
-      </form>
-
-      <p id="status-message" class="status-message"></p>
-    </section>
-
-    <section class="entries-section">
-      <div class="entries-header">
-        <h2>Alle Einträge</h2>
-        <button id="refresh-btn" class="secondary-btn">Neu laden</button>
+    <!-- AUTH SCREEN -->
+    <section id="auth-screen" class="auth-screen card">
+      <div class="auth-brand">
+        <div class="book-icon">📔</div>
+        <h1>Cozy Notebook</h1>
+        <p>Logge dich ein und öffne dein digitales Notizbuch.</p>
       </div>
 
-      <div id="entries-list" class="entries-list">
-        <p class="empty-state">Noch keine Einträge vorhanden 🌷</p>
+      <div class="auth-card-inner">
+        <input id="auth-name" type="text" placeholder="Name für die Registrierung" />
+        <input id="auth-email" type="email" placeholder="E-Mail" />
+        <input id="auth-password" type="password" placeholder="Passwort" />
+
+        <div class="auth-actions">
+          <button id="signup-btn" class="btn btn-primary">Registrieren</button>
+          <button id="login-btn" class="btn btn-secondary">Login</button>
+        </div>
+
+        <p id="auth-status" class="small-status">Willkommen ✨</p>
+      </div>
+    </section>
+
+    <!-- NOTEBOOK -->
+    <section id="notebook-screen" class="hidden">
+      <header class="hero card">
+        <div class="hero-left">
+          <div class="book-icon">📔</div>
+          <div>
+            <h1>Cozy Notebook</h1>
+            <p>Deine Notizen, live auf allen Geräten.</p>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="user-summary">
+            <img id="header-avatar" class="header-avatar" src="" alt="Profilbild" />
+            <div>
+              <strong id="header-name">Profil</strong>
+              <p id="header-email"></p>
+            </div>
+          </div>
+
+          <div class="auth-actions">
+            <button id="open-profile-btn" class="btn btn-secondary">Profil</button>
+            <button id="logout-btn" class="btn btn-secondary">Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="main-layout">
+        <aside class="sidebar card">
+          <div class="tabs">
+            <button id="tab-public" class="tab-btn active">🌍 Öffentlich</button>
+            <button id="tab-private" class="tab-btn">🔒 Privat</button>
+          </div>
+
+          <section class="filter-box">
+            <h3>Suche & Filter</h3>
+
+            <input id="search-input" class="small-search" type="text" placeholder="Suche..." />
+
+            <select id="category-filter">
+              <option value="all">Alle Kategorien</option>
+              <option value="allgemein">Allgemein</option>
+              <option value="idee">Idee</option>
+              <option value="wichtig">Wichtig</option>
+              <option value="arbeit">Arbeit</option>
+              <option value="erinnerung">Erinnerung</option>
+              <option value="privat">Privat</option>
+            </select>
+
+            <select id="color-filter">
+              <option value="all">Alle Farben</option>
+              <option value="standard">Standard</option>
+              <option value="rosa">Rosa</option>
+              <option value="blau">Blau</option>
+              <option value="gruen">Grün</option>
+              <option value="gelb">Gelb</option>
+              <option value="lila">Lila</option>
+            </select>
+
+            <select id="sort-filter">
+              <option value="updated">Zuletzt bearbeitet</option>
+              <option value="newest">Neueste zuerst</option>
+              <option value="oldest">Älteste zuerst</option>
+            </select>
+
+            <label class="checkbox-row">
+              <input type="checkbox" id="favorites-only" />
+              <span>Nur Favoriten</span>
+            </label>
+
+            <button id="clear-filters-btn" class="btn btn-secondary full-width">Filter zurücksetzen</button>
+          </section>
+
+          <section class="status-box">
+            <h3>Status</h3>
+            <p id="live-status">Verbinde Live-Sync...</p>
+            <p id="status-message">Bereit ✨</p>
+            <p id="stats-text">0 Einträge</p>
+          </section>
+        </aside>
+
+        <section class="content">
+          <section class="note-editor card notebook-paper">
+            <div class="editor-top">
+              <div>
+                <h2 id="editor-title">Neue öffentliche Notiz</h2>
+                <p id="editor-subtitle">Schreibe etwas Schönes auf.</p>
+              </div>
+              <span id="visibility-badge" class="visibility-badge">Öffentlich</span>
+            </div>
+
+            <form id="note-form">
+              <input type="hidden" id="note-id" />
+
+              <label for="title">Titel</label>
+              <input id="title" type="text" placeholder="Zum Beispiel: Idee für morgen" />
+
+              <label for="category">Kategorie</label>
+              <select id="category">
+                <option value="allgemein">Allgemein</option>
+                <option value="idee">Idee</option>
+                <option value="wichtig">Wichtig</option>
+                <option value="arbeit">Arbeit</option>
+                <option value="erinnerung">Erinnerung</option>
+                <option value="privat">Privat</option>
+              </select>
+
+              <label for="color-tag">Farbkarte</label>
+              <select id="color-tag">
+                <option value="standard">Standard</option>
+                <option value="rosa">Rosa</option>
+                <option value="blau">Blau</option>
+                <option value="gruen">Grün</option>
+                <option value="gelb">Gelb</option>
+                <option value="lila">Lila</option>
+              </select>
+
+              <label class="checkbox-row">
+                <input type="checkbox" id="is-favorite" />
+                <span>Als Favorit markieren</span>
+              </label>
+
+              <label for="content">Notiz</label>
+              <textarea id="content" rows="8" placeholder="Schreibe hier deine Gedanken auf..."></textarea>
+
+              <div class="form-actions">
+                <button id="save-btn" type="submit" class="btn btn-primary">Eintrag speichern</button>
+                <button id="cancel-edit-btn" type="button" class="btn btn-secondary hidden">Bearbeiten abbrechen</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="notes-panel card">
+            <div class="notes-header">
+              <div>
+                <h2 id="list-title">Öffentliche Notizen</h2>
+                <p id="results-info">0 Einträge</p>
+              </div>
+              <button id="refresh-btn" class="btn btn-secondary">Neu laden</button>
+            </div>
+
+            <div id="notes-list" class="notes-list">
+              <p class="empty-state">Noch keine Notizen da 🌷</p>
+            </div>
+          </section>
+        </section>
       </div>
     </section>
   </main>
+
+  <div id="profile-modal" class="modal hidden">
+    <div class="modal-card card">
+      <div class="modal-top">
+        <h2>Profil bearbeiten</h2>
+        <button id="close-profile-btn" class="btn btn-secondary">Schließen</button>
+      </div>
+
+      <div class="profile-preview">
+        <img id="profile-preview-image" class="profile-preview-image" src="" alt="Profilbild Vorschau" />
+      </div>
+
+      <label for="profile-name">Anzeigename</label>
+      <input id="profile-name" type="text" placeholder="Dein Name" />
+
+      <label for="profile-bio">Kurzinfo</label>
+      <textarea id="profile-bio" rows="3" placeholder="Kleine Profilbeschreibung"></textarea>
+
+      <label for="profile-image">Profilbild</label>
+      <input id="profile-image" type="file" accept="image/png, image/jpeg, image/webp" />
+
+      <div class="form-actions">
+        <button id="save-profile-btn" class="btn btn-primary">Profil speichern</button>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
